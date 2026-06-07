@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seung Hyuk Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    background: #fff;
+    color: #222;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  a { color: #1a73e8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ── HERO: photo left, bio right ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 56px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .hero-photo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .hero-photo-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+    background: #f0f4f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #aab;
+    margin-bottom: 16px;
+  }
+  .hero-contact {
+    list-style: none;
+    font-size: 14px;
+    color: #555;
+    line-height: 2;
+  }
+  .hero-contact a { color: #1a73e8; }
+
+  .hero-bio h1 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .hero-bio .affil {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .hero-bio p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.75;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .hero-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .hero-links a {
+    color: #1a73e8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 48px; }
+
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #111;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { list-style: none; }
+  .pub-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .pub-item:last-child { margin-bottom: 0; }
+  .pub-num {
+    font-size: 13px;
+    color: #999;
+    min-width: 28px;
+    padding-top: 2px;
+    font-weight: 400;
+  }
+  .pub-body {}
+  .pub-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.45;
+    margin-bottom: 3px;
+  }
+  .pub-authors {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 3px;
+    font-weight: 300;
+  }
+  .pub-authors strong {
+    font-weight: 600;
+    color: #222;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .pub-venue-line {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+  .pub-venue-name {
+    font-weight: 600;
+    font-style: normal;
+    color: #1a73e8;
+  }
+  .pub-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .tag-appear { background: #e8f5e9; color: #2e7d32; }
+  .tag-submitted { background: #fff3e0; color: #e65100; }
+  .pub-links-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .pub-links-row a {
+    font-size: 13px;
+    color: #1a73e8;
+    border: 1px solid #c5d8f8;
+    padding: 1px 10px;
+    border-radius: 3px;
+    transition: background 0.15s;
+  }
+  .pub-links-row a:hover { background: #e8f0fe; text-decoration: none; }
+
+  /* ── AWARD ── */
+  .award-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .award-year {
+    font-size: 13px;
+    color: #999;
+    min-width: 40px;
+    font-weight: 400;
+    padding-top: 2px;
+  }
+  .award-body {}
+  .award-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 2px;
+  }
+  .award-desc {
+    font-size: 14px;
+    color: #555;
+    font-weight: 300;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { list-style: none; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: start;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-period {
+    font-size: 13px;
+    color: #999;
+    padding-top: 2px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .tl-content {}
+  .tl-role {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 1px;
+  }
+  .tl-org {
+    font-size: 14px;
+    color: #1a73e8;
+    margin-bottom: 3px;
+  }
+  .tl-desc {
+    font-size: 14px;
+    color: #555;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── SERVICES ── */
+  .services-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .services-table th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .services-table th:first-child { width: 130px; }
+  .services-table td {
+    padding: 7px 0;
+    border-bottom: 1px solid #f3f3f3;
+    color: #333;
+    vertical-align: top;
+    font-weight: 300;
+  }
+  .services-table td:first-child {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #888;
+    padding-right: 12px;
+  }
+  .services-table tr:last-child td { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+    color: #aaa;
+    font-weight: 300;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 60px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; }
+    .hero-photo img, .hero-photo-placeholder { width: 140px; height: 140px; }
+    .tl-item { grid-template-columns: 1fr; gap: 4px; }
+    .tl-period { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-photo">
+      <img src="jgz261508.jpg" alt="Seung Hyuk Lee">
+      <ul class="hero-contact">
+        <li><a href="mailto:hyukiggle@yonsei.ac.kr">hyukiggle@yonsei.ac.kr</a></li>
+        <li><a href="https://github.com/hyukiggle" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?user=KhB8NeAAAAAJ&hl=ko" target="_blank">Google Scholar</a></li>
+        <!-- <li><a href="cv.pdf" target="_blank">Curriculum Vitae</a></li> -->
+      </ul>
+    </div>
+    <div class="hero-bio">
+      <h1>Seung Hyuk Lee</h1>
+      <div class="affil">Ph.D. Student &nbsp;·&nbsp; School of Integrated Technology, Yonsei University</div>
+      <p>
+        I am a Ph.D. student at Yonsei University advised by Prof. Songkuk Kim.
+        My research focuses on <strong>mechanistic interpretability</strong> and <strong>fairness</strong>
+        in text-to-image diffusion models, with a particular interest in understanding
+        and mitigating demographic biases in the MMDiT architecture of Stable Diffusion 3.5.
+      </p>
+      <p>
+        My work spans empirical bias measurement, training-free debiasing interventions,
+        and interpretability-driven analysis of generative vision models.
+      </p>
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="pub-list">
+
+      <li class="pub-item">
+        <div class="pub-num">[3]</div>
+        <div class="pub-body">
+          <div class="pub-title">Anonymized Paper</div>
+          <div class="pub-authors"><strong>Seung Hyuk Lee</strong>, Songkuk Kim</div>
+          <div class="pub-venue-line">
+            <span class="pub-tag tag-submitted">Under Review</span>
+          </div>
+          <div class="pub-links-row">
+            <a href="#">Paper</a>
+            <a href="#">Code</a>
+            <a href="#">Project</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-num">[2]</div>
+        <div class="pub-body">
+          <div class="pub-title">DebFilter: Eradicating Biases Stashed in Value</div>
+          <div class="pub-authors"><strong>Seung Hyuk Lee</strong>, Songkuk Kim</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue-name">CVPR Findings 2026</span>
+            <span class="pub-tag tag-appear">to appear</span>
+          </div>
+          <div class="pub-links-row">
+            <a href="#">Paper</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-num">[1]</div>
+        <div class="pub-body">
+          <div class="pub-title">Fusing Brilliance: Evaluating the Encoder-Decoder Hybrids with CNN and Swin Transformer for Medical Segmentation</div>
+          <div class="pub-authors"><strong>Seung Hyuk Lee</strong>, Songkuk Kim</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue-name">IEEE Access</span>, 2024
+          </div>
+          <div class="pub-links-row">
+            <a href="#">Paper</a>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <h2>Awards &amp; Competitions</h2>
+    <div class="award-item">
+      <div class="award-year">2021</div>
+      <div class="award-body">
+        <div class="award-name">1st Place — Track IV: Taekwondo Motion Classification</div>
+        <div class="award-desc">MISO AI Challenge 2021 · National Information Society Agency (NIA), MISO Information Technology &amp; Airpass · Cash prize of ₩5,000,000</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION -->
+  <section id="experience">
+    <h2>Experience &amp; Education</h2>
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-period">2022 – Present</div>
+        <div class="tl-content">
+          <div class="tl-role">Ph.D. Student, School of Integrated Technology</div>
+          <div class="tl-org">Yonsei University, Seoul, South Korea</div>
+          <div class="tl-desc">Research on mechanistic interpretability of diffusion transformers and fairness evaluation in text-to-image generative models. Advisor: Prof. Songkuk Kim.</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-period">2021 – 2022</div>
+        <div class="tl-content">
+          <div class="tl-role">Research Intern</div>
+          <div class="tl-org">Efficient Neural Computing Lab</div>
+          <div class="tl-desc">Robustness optimization for classification models via data augmentation and dataset condensation.</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-period">2020 – 2021</div>
+        <div class="tl-content">
+          <div class="tl-role">Research Intern</div>
+          <div class="tl-org">LXPER Inc.</div>
+          <div class="tl-desc">Engineered data curation, structuring, and preprocessing pipelines to train a CSAT-targeted NLP generation model.</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-period">2014 – 2022</div>
+        <div class="tl-content">
+          <div class="tl-role">B.S., Mathematics</div>
+          <div class="tl-org">Kyung Hee University, Seoul, South Korea</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PROFESSIONAL SERVICES -->
+  <section id="services">
+    <h2>Professional Services &amp; Academic Activities</h2>
+    <table class="services-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reviewing</td>
+          <td>CVPR (2025, 2026), NeurIPS (2025), ICCV (2025)</td>
+        </tr>
+        <tr>
+          <td>Teaching</td>
+          <td>Teaching Assistant — Deep Learning, Yonsei University (2024)<br>Teaching Assistant — Computer Vision, Yonsei University (2023)</td>
+        </tr>
+        <tr>
+          <td>Mentorship</td>
+          <td>Undergraduate Research Mentor, Yonsei University (2023 – Present)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<footer style="max-width:900px; margin:0 auto; padding: 0 40px 40px;">
+  © 2026 Seung Hyuk Lee &nbsp;·&nbsp; Last updated June 2026
+</footer>
+
+</body>
+</html>
